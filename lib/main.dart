@@ -31,39 +31,8 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: NavBar(),
-      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text(
-          'Dhaan',
-        ),
-      ),
-      bottomNavigationBar: Container(
-        height: 60,
-        color: Colors.black87,
-        child: InkWell(
-          onTap: () {
-            HapticFeedback.vibrate();
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => DonatePage()),
-            );
-          },
-          child: const Padding(
-            padding: EdgeInsets.only(top: 8.0),
-            child: Column(
-              children: <Widget>[
-                Icon(
-                  Icons.volunteer_activism,
-                  color: Colors.white,
-                ),
-                Text(
-                  'Donate',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ],
-            ),
-          ),
-        ),
+        title: const Text('Dhaan'),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -78,97 +47,50 @@ class Home extends StatelessWidget {
                   enlargeCenterPage: true,
                   viewportFraction: 0.85,
                 ),
-                items: <Widget>[
-                  Image.asset(
-                    'images/slide1.jpg',
-                    fit: BoxFit.fill,
-                  ),
-                  Image.asset(
-                    'images/slide2.jpg',
-                    fit: BoxFit.fill,
-                  ),
-                  Image.asset(
-                    'images/slide3.jpg',
-                    fit: BoxFit.fill,
-                  ),
-                  Image.asset(
-                    'images/slide4.jpg',
-                    fit: BoxFit.fill,
-                  ),
+                items: const <Widget>[
+                  Image(image: AssetImage('images/Slide1.png')),
+                  Image(image: AssetImage('images/Slide2.png')),
+                  Image(image: AssetImage('images/Slide3.png')),
+                  Image(image: AssetImage('images/Slide4.png')),
                 ],
               ),
             ),
-            const Divider(),
-            Container(
-              color: Color(0xFFDEFCFD),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(
-                    Icons.volunteer_activism,
-                    size: 50.0,
-                  ),
-                  Text(
-                    'Donations Recieved So Far-',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                    ),
-                  ),
-                  Text(
-                    "'XX'",
-                    style: TextStyle(
-                      fontSize: 30,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(
-              height: 2,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Container(
-                color: const Color(0xFFDEFCFD),
-                child: Column(
-                  children: const [
-                    Text(
-                      "Our Mission:",
-                      style: TextStyle(
-                        fontSize: 45.0,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                    Text(
-                      '"To Reduce Hunger Deaths By Making Your Donations Reach The People In Need"',
-                      style: TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Divider(),
-            Container(
-              color: const Color(0xFFDEFCFD),
-              child: const Text(
-                '- FAO estimates that at least 435 million people are seriously undernourished in the world today.'
-                'Every Year, 15 million children die of hunger-related causes',
-                style: TextStyle(
-                  fontSize: 25.0,
-                  fontFamily: 'EduQLDBeginner',
-                ),
-                textAlign: TextAlign.center,
-              ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                buildDonateButton(
+                    context, 'Morning', Colors.orange, const MorningPage()),
+                buildDonateButton(
+                    context, 'Afternoon', Colors.blue, const Afternoon()),
+                buildDonateButton(
+                    context, 'Night', Colors.indigo, const NightPage()),
+              ],
             ),
           ],
         ),
       ),
     );
   }
+}
+
+Widget buildDonateButton(
+    BuildContext context, String label, Color color, Widget targetPage) {
+  return ElevatedButton(
+    onPressed: () {
+      HapticFeedback.vibrate();
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => targetPage),
+      );
+    },
+    style: ElevatedButton.styleFrom(
+      backgroundColor: color,
+      padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15),
+      textStyle: const TextStyle(fontSize: 18),
+    ),
+    child: Text(label),
+  );
 }
 
 class DonatePage extends StatefulWidget {
@@ -215,77 +137,37 @@ class Donate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.center, // Center buttons vertically
       children: <Widget>[
-        Expanded(
-          child: InkWell(
-            onTap: () {
-              HapticFeedback.vibrate();
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const MorningPage()),
-              );
-            },
-            splashColor: Colors.brown.withOpacity(0.5),
-            child: Ink(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('images/morning.jpg'),
-                  fit: BoxFit.fitWidth,
-                ),
-              ),
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 2,
-        ),
-        Expanded(
-          child: InkWell(
-            onTap: () {
-              HapticFeedback.vibrate();
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const Afternoon()),
-              );
-            }, // Handle your callback.
-            splashColor: Colors.brown.withOpacity(0.5),
-            child: Ink(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('images/afternoon.jpg'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
-        ),
-        SizedBox(
-          height: 2,
-        ),
-        Expanded(
-          child: InkWell(
-            onTap: () {
-              HapticFeedback.vibrate();
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const NightPage()),
-              );
-            }, // Handle your callback.
-            splashColor: Colors.brown.withOpacity(0.5),
-            child: Ink(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage('images/night.jpg'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
-        ),
+        _buildDonateButton(
+            context, 'Morning', Colors.orange, const MorningPage()),
+        const SizedBox(height: 20), // Add spacing between buttons
+        _buildDonateButton(
+            context, 'Afternoon', Colors.blue, const Afternoon()),
+        const SizedBox(height: 20),
+        _buildDonateButton(context, 'Night', Colors.indigo, const NightPage()),
       ],
     );
   }
+}
+
+Widget _buildDonateButton(
+    BuildContext context, String label, Color color, Widget targetPage) {
+  return ElevatedButton(
+    onPressed: () {
+      HapticFeedback.vibrate();
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => targetPage),
+      );
+    },
+    style: ElevatedButton.styleFrom(
+      backgroundColor: color,
+      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+      textStyle: const TextStyle(fontSize: 20),
+    ),
+    child: Text(label),
+  );
 }
 
 class MorningPage extends StatelessWidget {
