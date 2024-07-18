@@ -15,7 +15,7 @@ class NavBar extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.close),
               onTap: () {
-                Clipboard.setData(ClipboardData());
+                // Clipboard.setData(ClipboardData());
                 HapticFeedback.vibrate();
                 Navigator.pop(context);
               },

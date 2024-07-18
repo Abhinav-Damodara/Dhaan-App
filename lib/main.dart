@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'NavBar.dart';
 import 'package:flutter/services.dart';
 
 void main() {
-  runApp(HomeApp());
+  runApp(const HomeApp());
 }
 
 class HomeApp extends StatefulWidget {
@@ -16,13 +15,12 @@ class HomeApp extends StatefulWidget {
 }
 
 class _HomeAppState extends State<HomeApp> {
-  static const String _title = 'Dhaan';
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Home(),
-    );
+    return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Home(),
+        theme: ThemeData.dark());
   }
 }
 
@@ -35,13 +33,8 @@ class Home extends StatelessWidget {
       drawer: NavBar(),
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.grey[900],
         title: const Text(
           'Dhaan',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20.0,
-          ),
         ),
       ),
       bottomNavigationBar: Container(
@@ -49,17 +42,16 @@ class Home extends StatelessWidget {
         color: Colors.black87,
         child: InkWell(
           onTap: () {
-            Clipboard.setData(ClipboardData());
             HapticFeedback.vibrate();
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => DonatePage()),
             );
           },
-          child: Padding(
-            padding: const EdgeInsets.only(top: 8.0),
+          child: const Padding(
+            padding: EdgeInsets.only(top: 8.0),
             child: Column(
-              children: const <Widget>[
+              children: <Widget>[
                 Icon(
                   Icons.volunteer_activism,
                   color: Colors.white,
@@ -76,44 +68,6 @@ class Home extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // CarouselSlider(
-            //   options: CarouselOptions(scrollDirection: Axis.horizontal),
-            //   items: [1, 2, 3, 4, 5].map(
-            //     (i) {
-            //       return Builder(
-            //         builder: (BuildContext context) {
-            //           return Container(
-            //             width: MediaQuery.of(context).size.width,
-            //             margin: const EdgeInsets.symmetric(horizontal: 5.0),
-            //             decoration: const BoxDecoration(color: Colors.amber),
-            //             child: const Image(
-            //               image: AssetImage(
-            //                 'images/afternoon.jpg',
-            //               ),
-            //             ),,
-            //           );
-            //         },
-            //       );
-            //     },
-            //   ).toList(),
-            // ),
-            // CarouselSlider(
-            //     items: items,
-            //     options: CarouselOptions(
-            //       height: 400,
-            //       aspectRatio: 16/9,
-            //       viewportFraction: 0.8,
-            //       initialPage: 0,
-            //       enableInfiniteScroll: true,
-            //       reverse: false,
-            //       autoPlay: true,
-            //       autoPlayInterval: Duration(seconds: 3),
-            //       autoPlayAnimationDuration: Duration(milliseconds: 800),
-            //       autoPlayCurve: Curves.fastOutSlowIn,
-            //       enlargeCenterPage: true,
-            //       scrollDirection: Axis.horizontal,
-            //     )
-            // ),
             Padding(
               padding: const EdgeInsets.fromLTRB(0, 10, 0, 20),
               child: CarouselSlider(
@@ -144,35 +98,6 @@ class Home extends StatelessWidget {
                 ],
               ),
             ),
-            // ImageSlideshow(
-            //   height: 250,
-            //   initialPage: 0,
-            //   indicatorColor: Colors.blue,
-            //   indicatorBackgroundColor: Colors.grey,
-            //   onPageChanged: (value) {
-            //     print('Page changed: $value');
-            //   },
-            //   autoPlayInterval: 3000,
-            //   isLoop: true,
-            //   children: [
-            //     Image.asset(
-            //       'images/slide1.jpg',
-            //       fit: BoxFit.fill,
-            //     ),
-            //     Image.asset(
-            //       'images/slide2.jpg',
-            //       fit: BoxFit.fill,
-            //     ),
-            //     Image.asset(
-            //       'images/slide3.jpg',
-            //       fit: BoxFit.fill,
-            //     ),
-            //     Image.asset(
-            //       'images/slide4.jpg',
-            //       fit: BoxFit.fill,
-            //     ),
-            //   ],
-            // ),
             const Divider(),
             Container(
               color: Color(0xFFDEFCFD),
@@ -239,24 +164,6 @@ class Home extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            // Container(
-            //   width: 1000,
-            //   child: ElevatedButton(
-            //     style: ElevatedButton.styleFrom(
-            //       primary: Colors.grey[900],
-            //     ),
-            //     onPressed: () {
-            //       Navigator.push(
-            //         context,
-            //         MaterialPageRoute(builder: (context) => const DonatePage()),
-            //       );
-            //     },
-            //     child: const Text(
-            //       'Donate',
-            //       style: TextStyle(color: Colors.white, fontSize: 20),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),
@@ -279,6 +186,7 @@ class _DonatePageState extends State<DonatePage> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: _title,
+      theme: ThemeData.dark(),
       home: Scaffold(
         backgroundColor: Colors.black,
         appBar: AppBar(
@@ -287,12 +195,10 @@ class _DonatePageState extends State<DonatePage> {
               Icons.arrow_back_rounded,
             ),
             onPressed: () {
-              Clipboard.setData(ClipboardData());
               HapticFeedback.vibrate();
               Navigator.pop(context);
             },
           ),
-          backgroundColor: Colors.grey[900],
           title: const Text(
             'Donate',
           ),
@@ -311,49 +217,17 @@ class Donate extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        // Container(
-        //   height: 47.5,
-        //   width: 350,
-        //   child: ElevatedButton(
-        //     style: ElevatedButton.styleFrom(
-        //       primary: Colors.indigoAccent,
-        //     ),
-        //     child: const Text(
-        //       'Morning',
-        //       style: TextStyle(color: Colors.white, fontSize: 20),
-        //     ),
-        //     onPressed: () {
-        //       Navigator.push(
-        //         context,
-        //         MaterialPageRoute(builder: (context) => const MorningPage()),
-        //       );
-        //     },
-        //   ),
-        // ),
-        // Container(
-        //   child: ConstrainedBox(
-        //     constraints: BoxConstraints.tightForFinite(double width: double.infinity, double height: double.infinity),
-        //     child: FlatButton(
-        //       onPressed: null,
-        //       padding: EdgeInsets.all(100.0),
-        //       child: Image.asset('images/slide1.jpg'),
-        //     ),
-        //   ),
-        // ),
         Expanded(
           child: InkWell(
             onTap: () {
-              Clipboard.setData(ClipboardData());
               HapticFeedback.vibrate();
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const MorningPage()),
               );
-            }, // Handle your callback.
+            },
             splashColor: Colors.brown.withOpacity(0.5),
             child: Ink(
-              // height: 175,
-              // width: 500,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('images/morning.jpg'),
@@ -369,7 +243,6 @@ class Donate extends StatelessWidget {
         Expanded(
           child: InkWell(
             onTap: () {
-              Clipboard.setData(ClipboardData());
               HapticFeedback.vibrate();
               Navigator.push(
                 context,
@@ -378,8 +251,6 @@ class Donate extends StatelessWidget {
             }, // Handle your callback.
             splashColor: Colors.brown.withOpacity(0.5),
             child: Ink(
-              // height: 175,
-              // width: 500,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('images/afternoon.jpg'),
@@ -395,7 +266,6 @@ class Donate extends StatelessWidget {
         Expanded(
           child: InkWell(
             onTap: () {
-              Clipboard.setData(ClipboardData());
               HapticFeedback.vibrate();
               Navigator.push(
                 context,
@@ -404,8 +274,6 @@ class Donate extends StatelessWidget {
             }, // Handle your callback.
             splashColor: Colors.brown.withOpacity(0.5),
             child: Ink(
-              // height: 175,
-              // width: 500,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('images/night.jpg'),
@@ -415,46 +283,6 @@ class Donate extends StatelessWidget {
             ),
           ),
         ),
-        // Container(
-        //   height: 47.5,
-        //   width: 350,
-        //   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-        //   child: ElevatedButton(
-        //     style: ElevatedButton.styleFrom(
-        //       primary: Colors.indigoAccent[400],
-        //     ),
-        //     child: const Text(
-        //       'Afternoon',
-        //       style: TextStyle(color: Colors.white, fontSize: 20),
-        //     ),
-        //     onPressed: () {
-        //       Navigator.push(
-        //         context,
-        //         MaterialPageRoute(builder: (context) => const Afternoon()),
-        //       );
-        //     },
-        //   ),
-        // ),
-        // Container(
-        //   height: 47.5,
-        //   width: 350,
-        //   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-        //   child: ElevatedButton(
-        //     style: ElevatedButton.styleFrom(
-        //       primary: Colors.blueAccent,
-        //     ),
-        //     child: const Text(
-        //       'Night',
-        //       style: TextStyle(color: Colors.white, fontSize: 20),
-        //     ),
-        //     onPressed: () {
-        //       Navigator.push(
-        //         context,
-        //         MaterialPageRoute(builder: (context) => const NightPage()),
-        //       );
-        //     },
-        //   ),
-        // ),
       ],
     );
   }
@@ -480,7 +308,7 @@ class MorningPage extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
-                Clipboard.setData(ClipboardData());
+                // Clipboard.setData(ClipboardData());
                 HapticFeedback.vibrate();
                 Navigator.pop(context);
               },
@@ -565,7 +393,7 @@ class _MorningPageStatefulState extends State<MorningPageStateful> {
               child: ElevatedButton(
                 child: Text('Submit'),
                 onPressed: () {
-                  Clipboard.setData(ClipboardData());
+                  // Clipboard.setData(ClipboardData());
                   HapticFeedback.vibrate();
                   print(nameController.text);
                   print(mobileController.text);
@@ -576,9 +404,9 @@ class _MorningPageStatefulState extends State<MorningPageStateful> {
                     MaterialPageRoute(builder: (context) => const SubmitPage()),
                   );
                 },
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.grey[900],
-                ),
+                // style: ElevatedButton.styleFrom(
+                //   primary: Colors.grey[900],
+                // ),
               ),
             ),
           ],
@@ -607,7 +435,7 @@ class Afternoon extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
-                Clipboard.setData(ClipboardData());
+                // Clipboard.setData(ClipboardData());
                 HapticFeedback.vibrate();
                 Navigator.pop(context);
               },
@@ -689,9 +517,8 @@ class _AfternoonPageStateState extends State<AfternoonPageState> {
               height: 50,
               width: 175,
               child: ElevatedButton(
-                child: const Text('Submit'),
                 onPressed: () {
-                  Clipboard.setData(ClipboardData());
+                  // Clipboard.setData(ClipboardData());
                   HapticFeedback.vibrate();
                   print(nameController.text);
                   print(mobileController.text);
@@ -702,9 +529,10 @@ class _AfternoonPageStateState extends State<AfternoonPageState> {
                     MaterialPageRoute(builder: (context) => const SubmitPage()),
                   );
                 },
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.grey[900],
-                ),
+                // style: ElevatedButton.styleFrom(
+                //   primary: Colors.grey[900],
+                // ),
+                child: const Text('Submit'),
               ),
             ),
           ],
@@ -733,7 +561,7 @@ class NightPage extends StatelessWidget {
                 color: Colors.white,
               ),
               onPressed: () {
-                Clipboard.setData(ClipboardData());
+                // Clipboard.setData(ClipboardData());
                 HapticFeedback.vibrate();
                 Navigator.pop(context);
               },
@@ -818,7 +646,7 @@ class _NightPageStateState extends State<NightPageState> {
               child: ElevatedButton(
                 child: const Text('Submit'),
                 onPressed: () {
-                  Clipboard.setData(ClipboardData());
+                  // Clipboard.setData(ClipboardData());
                   HapticFeedback.vibrate();
                   print(nameController.text);
                   print(mobileController.text);
@@ -829,9 +657,6 @@ class _NightPageStateState extends State<NightPageState> {
                     MaterialPageRoute(builder: (context) => const SubmitPage()),
                   );
                 },
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.grey[900],
-                ),
               ),
             ),
           ],
@@ -857,7 +682,6 @@ class SubmitPage extends StatelessWidget {
               color: Colors.white,
             ),
             onPressed: () {
-              Clipboard.setData(ClipboardData());
               HapticFeedback.vibrate();
               Navigator.push(
                 context,
@@ -865,9 +689,9 @@ class SubmitPage extends StatelessWidget {
               );
             },
           ),
-          title: Text('Dhaan'),
+          title: const Text('Dhaan'),
         ),
-        body: Center(
+        body: const Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

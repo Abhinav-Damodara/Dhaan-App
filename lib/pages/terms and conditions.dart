@@ -5,10 +5,10 @@ class TermsAndConditions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: const Text('Terms and Conditions'),
-      centerTitle: true,
-      backgroundColor: Colors.blue,
-    ),
-    );
+        appBar: AppBar(
+          title: const Text('Terms and Conditions'),
+          centerTitle: true,
+          // backgroundColor: Colors.blue,
+        ),
+      );
 }
